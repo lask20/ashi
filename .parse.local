@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "ASHI": {
+      "applicationId": "p8k9QuDshK6V5fJ6MG1deZ7Oj41KwMxdYGHt8wW7"
+    },
+    "_default": {
+      "link": "ASHI"
+    }
+  }
+}
