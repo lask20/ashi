@@ -81,7 +81,7 @@ if ($currentUser) {
         <h2 class="form-signin-heading">Please sign in</h2>
         
         <label for="username" class="sr-only">Email address</label>
-        <input id="username" type="text" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+        <input id="username" type="text" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
         <label for="password" class="sr-only">Password</label>
         <input id="password" type="password" name="password" class="form-control" placeholder="Password" required="">
         <button class="btn btn-lg btn-primary btn-block" >Login</button><br>
