@@ -120,7 +120,6 @@ else if (!empty($_POST['email']) ){
                     <?php echo $status; ?>   
           </div>
           <form action="#" method="post">
-            <label for="exampleInputFile">Profile Picture</label>
             <!--
             <input type="file" id="exampleInputFile"></br>
             -->
