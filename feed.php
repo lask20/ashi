@@ -1,5 +1,5 @@
 <?php
-include "/include/checkauth.php";
+include "include/parse.php";
 use Parse\ParseQuery;
 
 $query = new ParseQuery("NotiData");
