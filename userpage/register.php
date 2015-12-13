@@ -31,7 +31,7 @@ if (!empty($_POST['email'])) {
 
   try {
     $user->signUp();
-      header('Location: /');
+      header('Location: afterRegister.html');
   } catch (ParseException $ex) {
   // Show the error message somewhere and let the user try again.
     //echo  $ex->getMessage();
