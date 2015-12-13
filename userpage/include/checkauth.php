@@ -12,6 +12,7 @@ if (!$currentUser) {
     exit;
 }
 if ($currentUser->get('approve') == 0) {
+		ParseUser::logOut();
 		header('Location: notApproval.html');
 		exit;
 	}
