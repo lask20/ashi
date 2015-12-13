@@ -85,8 +85,9 @@ if ($currentUser) {
         <label for="password" class="sr-only">Password</label>
         <input id="password" type="password" name="password" class="form-control" placeholder="Password" required="">
         <button class="btn btn-lg btn-primary btn-block" >Login</button>
+        <a href="register.php">Register</a>
       </form>
-      <a href="register.php">Register</a>
+      
       
 
 
