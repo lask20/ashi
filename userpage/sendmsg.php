@@ -41,7 +41,6 @@ if (!empty($_POST['message'])) {
 
   ParsePush::send(array(
     "where" => $query,
-    "channels" => $_POST['priority'],
     "data" => array(
       "badge" => "Increment",
       "alert" => $_POST['message']
