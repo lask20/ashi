@@ -6,7 +6,7 @@ $query = new ParseQuery("NotiData");
 
 // Get a specific object:
 //$query->equalTo("user", $currentUser);
-$query->descending("createกAt");
+$query->descending("createdAt");
 $object = $query->first();
 
 echo $object->get("message");
