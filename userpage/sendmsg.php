@@ -4,14 +4,35 @@ include "include/checkauth.php";
 use Parse\ParseInstallation;
 use Parse\ParsePush;
 use Parse\ParseObject;
+use Parse\ParseQuery;
+use Parse\ParseGeoPoint;
 
 $message = "";
 
 if (!empty($_POST['message'])) {
   $message = $_POST['message'];
+  
+
+  // $user = new ParseQuery("_User",$currentUser);
+  // $user->equalTo("username", $currentUser->getUsername());
+
+  // $locationObj = $user->find();;
+  // $location = $locationObj;
+
+ 
+  $location = $currentUser->get('location');
+
+  $sw = new ParseGeoPoint(floatval($location[1]->getLatitude()), floatval($location[1]->getLongitude()));
+  $ne = new ParseGeoPoint(floatval($location[0]->getLatitude()), floatval($location[0]->getLongitude()));
+
+
   $query = ParseInstallation::query();
 //$query->equalTo("channels", "Giants");
 //$query->equalTo("scores", true);
+
+
+
+  $query->withinGeoBox("location", $sw,$ne );
 
   ParsePush::send(array(
     "where" => $query,
