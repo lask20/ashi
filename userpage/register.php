@@ -6,7 +6,7 @@ use Parse\ParseGeoPoint;
 
 if (!empty($_POST['email'])) {
   $user = new ParseUser();
-//$user->set("username", $_POST['email']);
+  $user->set("username", $_POST['email']);
   $user->set("password", $_POST['password']);
   $user->set("email", $_POST['email']);
   $user->set("phone", $_POST['phone']);
