@@ -19,20 +19,23 @@ if (!empty($_POST['message'])) {
   // $locationObj = $user->find();;
   // $location = $locationObj;
 
- 
+  
   $location = $currentUser->get('location');
 
-  $sw = new ParseGeoPoint(floatval($location[1]->getLatitude()), floatval($location[1]->getLongitude()));
-  $ne = new ParseGeoPoint(floatval($location[0]->getLatitude()), floatval($location[0]->getLongitude()));
+  
 
 
   $query = ParseInstallation::query();
 //$query->equalTo("channels", "Giants");
 //$query->equalTo("scores", true);
 
+  if (!empty($location)) {
+    $sw = new ParseGeoPoint(floatval($location[1]->getLatitude()), floatval($location[1]->getLongitude()));
+    $ne = new ParseGeoPoint(floatval($location[0]->getLatitude()), floatval($location[0]->getLongitude()));
+    $query->withinGeoBox("location", $sw,$ne );
+  }
 
-
-  $query->withinGeoBox("location", $sw,$ne );
+  
 
   ParsePush::send(array(
     "where" => $query,

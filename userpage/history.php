@@ -9,7 +9,6 @@ $query->equalTo("user", $currentUser);
 
 $query->descending("createdAt");
 
-$query->limit(30); // default 100, max 1000
 
 $results = $query->find();
 
@@ -79,70 +78,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<section class="content">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Responsive Hover Table</h3>
-						<div class="box-tools">
-							<div class="input-group" style="width: 150px;">
-								<input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-								<div class="input-group-btn">
-									<button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-								</div>
-							</div>
-						</div>
+						<h3 class="box-title">Table</h3>
 					</div><!-- /.box-header -->
-					<div class="box-body table-responsive no-padding">
-						<table class="table table-hover">
-							<tbody><tr>
-								<th>Date</th>
-								<th>Priority</th>
-								<th>Message</th>
-							</tr>
-							<?php
+					<div class="box-body">
+						<table id="history" class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Priority</th>
+									<th>Message</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<?php
 
 
-							for ($i = 0; $i < count($results); $i++) {
-								$object = $results[$i];
-								$time = $object->getCreatedAt();
-								$time->setTimezone(new DateTimeZone('Asia/Bangkok'));
-								echo "<tr>";
-								echo "<td>". $time->format('Y-m-d H:i:s') ."</td>";
-								echo "<td><span class=\"label label-primary\">". $object->get('priority')." </span></td>";
-								echo "<td>". $object->get('message') ."</td>";
-								echo "</tr>";
-							}
-							?>
-							<tr>
-
-								<td>11-7-2014</td>
-								<td><span class="label label-primary">Low</span></td>
-								<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-							</tr>
-							<tr>
-
-								<td>11-7-2014</td>
-								<td><span class="label label-success">medium</span></td>
-								<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-							</tr>
-							<tr>
-
-								<td>11-7-2014</td>
-								<td><span class="label label-warning">High</span></td>
-								<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-							</tr>
-							<tr>
-
-								<td>11-7-2014</td>
-								<td><span class="label label-danger">Critical</span></td>
-								<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-							</tr>
-						</tbody></table>
+								for ($i = 0; $i < count($results); $i++) {
+									$object = $results[$i];
+									$time = $object->getCreatedAt();
+									$time->setTimezone(new DateTimeZone('Asia/Bangkok'));
+									echo "<tr>";
+									echo "<td>". $time->format('Y-m-d H:i:s') ."</td>";
+									echo "<td><span class=\"label label-";
+									switch ($object->get('priority')) {
+										case 'Low':
+											echo "primary";
+											break;
+										case 'Medium':
+											echo "success";
+											break;
+										case 'High':
+											echo "warning";
+											break;
+										case 'Critical':
+											echo "danger";
+											break;
+										
+									}
+									echo "\">". $object->get('priority')." </span></td>";
+									echo "<td>". $object->get('message') ."</td>";
+									echo "</tr>";
+								}
+								?>
+								
+							</tbody>
+						</table>
 					</div><!-- /.box-body -->
-				</div>
-				<!-- Your Page Content Here -->
+				</div><!-- /.box -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
 
-			</section><!-- /.content -->
-		</div><!-- /.content-wrapper -->
+	</section><!-- /.content -->
+</div><!-- /.content-wrapper -->
 
-		<?php include "include/control-sidebar.php" ?>
+<?php include "include/control-sidebar.php" ?>
 
       <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
@@ -157,6 +147,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/app.min.js"></script>
+
+  <!-- DataTables -->
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+  <!-- SlimScroll -->
+  <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="plugins/fastclick/fastclick.min.js"></script>
+
+  <script>
+  	$(function () {
+
+  		$('#history').DataTable();
+  	});
+  </script>
 
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the

@@ -3,6 +3,7 @@
 include "include/parse.php";
 use Parse\ParseUser;
 use Parse\ParseException;
+use Parse\ParseQuery;
 
 $currentUser = ParseUser::getCurrentUser();
 
@@ -15,6 +16,14 @@ if ($currentUser->get('role') !== "admin") {
   exit;
 }
 
+$query = new ParseQuery("_User",$currentUser);
+$query->notEqualTo("role", "admin");
+$query->descending("createdAt");
+$query->descending("verifed");
+
+//$query->limit(30); // default 100, max 1000
+
+$results = $query->find();
 ?>
 
 
@@ -68,9 +77,9 @@ if ($currentUser->get('role') !== "admin") {
                 <span class="icon-bar"></span>
               </a>
               <!-- Control Sidebar Toggle Button -->
-              
-              
-              
+
+
+
             </nav>
           </header>
           <!-- Left side column. contains the logo and sidebar -->
@@ -118,35 +127,37 @@ if ($currentUser->get('role') !== "admin") {
                     <thead>
                       <tr>
                         <th>Email</th>
-                        <th>Password</th>
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <th>Location</th>
+                        <th>Register at</th>
                         <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>aeiei@eueu.com</td>
-                        <td>aqwjelkasjd</td>
-                        <td>aeiei eueu</td>
-                        <td>0881548123</td>
-                        <td>กสำนักงานใหญ่ อาคารกรุงเทพประกันภัย. 25 ถนนสาทรใต้ แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพฯ </td>
-                        <td>a[{"__type":"GeoPoint","latitude":44.599,"longitude":-78.44299999999998},{"__type":"GeoPoint","latitude":44.49,"longitude":-78.649}]</td>
-                        <td><a class="btn btn-warning btn-xs">Click to Accept</a></td>
-                      </tr>
+                      <?php
 
-                      <tr>
-                        <td>eiei@eueu.com</td>
-                        <td>qwjelkasjd</td>
-                        <td>eiei eueu</td>
-                        <td>0891548123</td>
-                        <td>สำนักงานใหญ่ อาคารกรุงเทพประกันภัย. 25 ถนนสาทรใต้ แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพฯ </td>
-                        <td>[{"__type":"GeoPoint","latitude":44.599,"longitude":-78.44299999999998},{"__type":"GeoPoint","latitude":44.49,"longitude":-78.649}]</td>
-                        <td><span class="label label-success">Accepted</span></span></td>
-                      </tr>
-                      
+
+                      for ($i = 0; $i < count($results); $i++) {
+                        $object = $results[$i];
+                        $time = $object->getCreatedAt();
+                        $time->setTimezone(new DateTimeZone('Asia/Bangkok'));
+                        echo "<tr>";
+                        echo "<td><a href=\"memberdetail.php?".$object->get('username')."\">". $object->get('username') ."</a></td>";
+                        echo "<td>". $object->get('fullName') ."</td>";
+                        echo "<td>". $object->get('phone') ."</td>";
+                        echo "<td>". $object->get('address') ."</td>";
+                        echo "<td>". $time->format('Y-m-d H:i:s') ."</td>";
+                        if ($object->get('verifed') == true) {
+                          echo "<td><a class=\"blabel label-success btn-xs\">Accepted</a></td>";
+                        }
+                        else {
+                          echo "<td><a class=\"label label-warning btn-xs\">Wait to Accept</a></td>";
+                        }
+                        echo "</tr>";
+                      }
+                      ?>
+
                     </table>
                   </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -154,7 +165,7 @@ if ($currentUser->get('role') !== "admin") {
             </div><!-- /.row -->
           </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
-        
+
 
         immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
