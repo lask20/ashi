@@ -176,7 +176,7 @@ $location = $results->get('location');
                     </div>
                      <div class="form-group has-feedback">
                       <label for="exampleInputEmail1">Address</label>
-                      <textarea value="<?php echo $results->get('address') ?>" class="form-control" rows="3" placeholder="Address" disabled=""></textarea>
+                      <textarea value="<?php echo $results->get('address') ?>" class="form-control" rows="3" placeholder="Address" disabled=""><?php echo $results->get('address') ?></textarea>
                       <span class="glyphicon glyphicon-home form-control-feedback"></span></br>
                        <label for="exampleInputEmail1">Location</label>
                     </div>
