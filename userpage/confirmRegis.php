@@ -1,13 +1,17 @@
 <?php
 
-include "parse.php";
+include "include/parse.php";
 use Parse\ParseUser;
 use Parse\ParseException;
 
 $currentUser = ParseUser::getCurrentUser();
-if (!$currentUser && $currentUser->get('role') != "admin") {
-    header('Location: ../login.php');
+if (is_null($currentUser)) {
+  header('Location: ../login.php');
+  exit;
 }
+  if ($currentUser->get('role') != "admin") {
+    header('Location: ../login.php');
+  }
 
 ?>
 
@@ -77,7 +81,7 @@ if (!$currentUser && $currentUser->get('role') != "admin") {
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Admin</p>
+              <p><?php echo $currentUser->getUsername(); ?></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -86,7 +90,7 @@ if (!$currentUser && $currentUser->get('role') != "admin") {
           <ul class="sidebar-menu">
             <li class="header">Menu Bar</li>
              <li class="active"><a href="#"><i class="fa fa-check-square-o"></i> <span>Confirm Registration</span></a></li>
-            <li><a href="#"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
+            <li><a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
