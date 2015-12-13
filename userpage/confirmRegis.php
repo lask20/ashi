@@ -16,6 +16,16 @@ if ($currentUser->get('role') !== "admin") {
   exit;
 }
 
+echo $_POST['username'];
+$query = new ParseQuery("_User",$currentUser);
+$query->EqualTo("username", $_POST['username']);
+$results = $query->first();
+
+if ($_POST['button'] == "deny") {
+  $results
+}
+
+
 $query = new ParseQuery("_User",$currentUser);
 $query->notEqualTo("role", "admin");
 $query->descending("createdAt");

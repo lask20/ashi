@@ -1,3 +1,31 @@
+<?php
+
+include "include/parse.php";
+use Parse\ParseUser;
+use Parse\ParseException;
+use Parse\ParseQuery;
+
+$currentUser = ParseUser::getCurrentUser();
+
+if (empty($currentUser)) {
+  header('Location: ../login.php');
+  exit;
+}
+if ($currentUser->get('role') !== "admin") {
+  header('Location: ../login.php');
+  exit;
+}
+if (empty($_GET['username'])) {
+  exit;
+}
+
+$query = new ParseQuery("_User",$currentUser);
+$query->EqualTo("username", $_GET['username']);
+
+$results = $query->first();
+$location = $results->get('location');
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,8 +58,8 @@
         min-height: 400px;
         min-width: 20%;
         border:2px solid white;
-        margin-left: 30%;
-        margin-right: 30%;
+        margin-left: 5%;
+        margin-right: 5%;
         margin-top: 1%;
         margin-bottom: 2%;
 
@@ -128,31 +156,27 @@
                   <h3 class="box-title">Detail</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form method="post" action="confirmRegis.php" role="form">
                   <div class="box-body">
                     <div class="form-group has-feedback">
                       <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" placeholder="eiei@eueu.com" disabled="">
+                      <input name="email" value="<?php echo $results->get('email') ?>" type="email" class="form-control" placeholder="eiei@eueu.com" disabled="">
+                      <input name="username" value="<?php echo $results->get('email') ?>" type="hidden">
                       <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                      <label>Password</label>
-                      <input type="password" class="form-control" placeholder="Password" disabled="">
-                      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
                       <label for="exampleInputEmail1">Full Name</label>
-                      <input type="password" class="form-control" placeholder="Full Name" disabled="">
+                      <input value="<?php echo $results->get('fullName') ?>" type="text" class="form-control" placeholder="Full Name" disabled="">
                       <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
                       <label for="exampleInputEmail1">Phone</label>
-                      <input type="email" class="form-control" placeholder="0891548123" disabled="">
+                      <input value="<?php echo $results->get('phone') ?>" type="text" class="form-control" placeholder="0891548123" disabled="">
                       <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
                     </div>
                      <div class="form-group has-feedback">
                       <label for="exampleInputEmail1">Address</label>
-                      <textarea class="form-control" rows="3" placeholder="Address" disabled=""></textarea>
+                      <textarea value="<?php echo $results->get('address') ?>" class="form-control" rows="3" placeholder="Address" disabled=""></textarea>
                       <span class="glyphicon glyphicon-home form-control-feedback"></span></br>
                        <label for="exampleInputEmail1">Location</label>
                     </div>
@@ -161,7 +185,7 @@
 
                     <div id="map"></div>
                   <div class="box-footer">
-                    <button class="btn btn-danger btn-lg"><i class="fa fa-trash-o"></i> Deny</button>  <div class="pull-right"><button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Accept</button></div>
+                    <button name="button" value="deny" class="btn btn-danger btn-lg"><i class="fa fa-trash-o"></i> Deny</button>  <div class="pull-right"><button name="button" value="accept" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Accept</button></div>
                   </div>
 
                 </form>
@@ -191,19 +215,6 @@
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
     <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
 
 
       <script>
@@ -218,15 +229,15 @@ var infoWindow;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 13.7777, lng: 100.4000},
-    zoom: 9
+    center: {lat: <?php echo $location[0]->getLatitude() ?>, lng: <?php echo $location[0]->getLongitude()?>},
+    zoom: 13
   });
 
   var bounds = {
-    north: 13.7500,
-    south: 13.6000,
-    east: 100.5500,
-    west: 100.4000
+    north: <?php echo $location[0]->getLatitude() ?>,
+    south: <?php echo $location[1]->getLatitude() ?>,
+    east: <?php echo $location[0]->getLongitude()?>,
+    west: <?php echo $location[1]->getLongitude() ?>
   };
 
   // Define the rectangle and set its editable property to true.
