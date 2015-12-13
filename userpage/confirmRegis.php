@@ -16,15 +16,19 @@ if ($currentUser->get('role') !== "admin") {
   exit;
 }
 
-echo $_POST['username'];
-$query = new ParseQuery("_User",$currentUser);
-$query->EqualTo("username", $_POST['username']);
-$results = $query->first();
+if (!empty($_POST['username'])) {
+  $query = new ParseQuery("_User",$currentUser);
+  $query->equalTo("username", $_POST['username']);
+  $results = $query->first();
 
-if ($_POST['button'] == "deny") {
-  $results
+  if ($_POST['button'] == "deny") {
+    $results->destroy(true);
+  }
+  else if ($_POST['button'] == "accept") {
+    $results->set("verifed",true);
+    $results->save(true);
+  }
 }
-
 
 $query = new ParseQuery("_User",$currentUser);
 $query->notEqualTo("role", "admin");
