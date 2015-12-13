@@ -112,8 +112,7 @@ if (!empty($_POST['email'])) {
             <b>A.S.H.I.</b>&nbsp;Register
             <br>
             <h2>
-                    <?php echo $status; ?>
-                  
+                    <?php echo $status; ?>   
           </div>
           <form action="#" method="post">
             <label for="exampleInputFile">Profile Picture</label>
