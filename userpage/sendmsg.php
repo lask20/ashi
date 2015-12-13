@@ -36,7 +36,7 @@ if (!empty($_POST['message'])) {
     $ne = new ParseGeoPoint(floatval($location[0]->getLatitude()), floatval($location[0]->getLongitude()));
     $query->withinGeoBox("location", $sw,$ne );
   }
-    $query["channels"] = [$_POST['priority']];
+    $query["channels"] = array($_POST['priority']);
   
 
   ParsePush::send(array(
