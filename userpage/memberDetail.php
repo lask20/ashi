@@ -133,7 +133,7 @@ $location = $results->get('location');
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Menu Bar</li>
-             <li class="active"><a href="#"><i class="fa fa-check-square-o"></i> <span>Confirm Registration</span></a></li>
+             <li class="active"><a href="?"><i class="fa fa-check-square-o"></i> <span>Confirm Registration</span></a></li>
             <li><a href="#"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
           </ul>
         </section>
