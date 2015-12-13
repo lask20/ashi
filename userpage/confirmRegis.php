@@ -1,3 +1,17 @@
+<?php
+
+include "parse.php";
+use Parse\ParseUser;
+use Parse\ParseException;
+
+$currentUser = ParseUser::getCurrentUser();
+if (!$currentUser && $currentUser->get('role') != "admin") {
+    header('Location: ../login.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
