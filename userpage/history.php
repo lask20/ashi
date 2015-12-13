@@ -7,6 +7,8 @@ $query = new ParseQuery("NotiData");
 // Get a specific object:
 $query->equalTo("user", $currentUser);
 
+$query->descending("createAt");
+
 $query->limit(30); // default 100, max 1000
 
 $results = $query->find();
