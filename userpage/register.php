@@ -1,3 +1,34 @@
+<?php
+include "include/parse.php";
+use Parse\ParseUser;
+use Parse\ParseException;
+
+if (!empty($_POST['email'])) {
+    $user = new ParseUser();
+//$user->set("username", $_POST['email']);
+$user->set("password", $_POST['password']);
+$user->set("email", $_POST['email']);
+$user->set("phone", $_POST['phone']);
+$user->set("fullName", $_POST['fullname']);
+
+$ne = new ParseGeoPoint($_POST['NorthEastLat'], $_POST['NorthEastLng']);
+$sw = new ParseGeoPoint($_POST['SouthWestLat'], $_POST['SouthWestLng']);
+$location = [$ne, $sw];
+$user->setArray("location", $location);
+
+
+try {
+  $user->signUp();
+  // Hooray! Let them use the app now.
+} catch (ParseException $ex) {
+  // Show the error message somewhere and let the user try again.
+  echo "Error: " . $ex->getCode() . " " . $ex->getMessage();
+}
+  }
+
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
