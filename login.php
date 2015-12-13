@@ -78,7 +78,7 @@ if ($currentUser) {
                     <?php echo $status; ?>
                   
       <form method="post" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Please Login</h2>
         
         <label for="username" class="sr-only">Email address</label>
         <input id="username" type="text" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
