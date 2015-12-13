@@ -135,9 +135,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="box-body">
         <form id="form_id" action="#" method="post">
           <div class="form-group">
-            
-          </div>
-          <div class="form-group">
             <label>Priority</label>
             <select name="priority" class="form-control">
               <option>Low</option>
