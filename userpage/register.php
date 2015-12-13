@@ -187,15 +187,15 @@ function showNewRect(event) {
   $("#SouthWestLat").val(sw.lat());
   $("#SouthWestLng").val(sw.lng());
 
-  var contentString = '<b>Rectangle moved.</b><br>' +
-  'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
-  'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
+  // var contentString = '<b>Rectangle moved.</b><br>' +
+  // 'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+  // 'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
 
-  // Set the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(ne);
+  // // Set the info window's content and position.
+  // infoWindow.setContent(contentString);
+  // infoWindow.setPosition(ne);
 
-  infoWindow.open(map);
+  // infoWindow.open(map);
 }
 
 </script>
