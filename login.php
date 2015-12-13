@@ -19,6 +19,9 @@ try {
 
 $currentUser = ParseUser::getCurrentUser();
 if ($currentUser) {
+  if ($currentUser->get('role') == "admin") {
+    header('Location: userpage/confirmRegis.php');
+  }
 
     header('Location: userpage/sendmsg.php');
 } else {
