@@ -10,7 +10,9 @@ try {
   $user = ParseUser::logIn($_POST['username'], $_POST['password']);
     echo "success";
 } catch (ParseException $error) {
-  $status = $error->getMessage();
+  $status = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+  $status .= $error->getMessage();
+  $status .= '</div>';
     //echo $error->getMessage();
 }
 }
@@ -65,11 +67,11 @@ if ($currentUser) {
   <body>
 
     <div class="container">
-     <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-ban"></i>Alert!</h4>
+     
+                    
+                    
                     <?php echo $status; ?>
-                  </div>
+                  
       <form method="post" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         

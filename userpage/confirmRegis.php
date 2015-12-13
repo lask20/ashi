@@ -143,7 +143,7 @@ $results = $query->find();
                         $time = $object->getCreatedAt();
                         $time->setTimezone(new DateTimeZone('Asia/Bangkok'));
                         echo "<tr>";
-                        echo "<td><a href=\"memberdetail.php?".$object->get('username')."\">". $object->get('username') ."</a></td>";
+                        echo "<td><a href=\"memberdetail.php?username=".$object->get('username')."\">". $object->get('username') ."</a></td>";
                         echo "<td>". $object->get('fullName') ."</td>";
                         echo "<td>". $object->get('phone') ."</td>";
                         echo "<td>". $object->get('address') ."</td>";
