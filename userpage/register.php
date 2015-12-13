@@ -11,8 +11,9 @@ if (!empty($_POST['email'])) {
   $user->set("email", $_POST['email']);
   $user->set("phone", $_POST['phone']);
   $user->set("fullName", $_POST['fullname']);
+  $user->set("address", $_POST['address']);
   $user->set("role", "user");
-  $user->set("verified", 0);
+  $user->set("verified", false);
 
   $ne = new ParseGeoPoint($_POST['NorthEastLat'], $_POST['NorthEastLng']);
   $sw = new ParseGeoPoint($_POST['SouthWestLat'], $_POST['SouthWestLng']);
