@@ -162,7 +162,7 @@ $results = $query->find();
                         echo "<td>". $object->get('phone') ."</td>";
                         echo "<td>". $object->get('address') ."</td>";
                         echo "<td>". $time->format('Y-m-d H:i:s') ."</td>";
-                        if ($object->get('verifed') == true) {
+                        if ($object->get('approve') == 1) {
                           echo "<td><a class=\"blabel label-success btn-xs\">Accepted</a></td>";
                         }
                         else {
