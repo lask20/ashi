@@ -12,7 +12,7 @@ function postVal($name) {
   return null;
 }
 
-if (!empty($_POST['email'])) {
+if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['fullname']) && !empty($_POST['phone']) && !empty($_POST['address'])) {
   $user = new ParseUser();
   $user->set("username", $_POST['email']);
   $user->set("password", $_POST['password']);
@@ -116,7 +116,9 @@ if (!empty($_POST['email'])) {
           </div>
           <form action="#" method="post">
             <label for="exampleInputFile">Profile Picture</label>
+            <!--
             <input type="file" id="exampleInputFile"></br>
+            -->
             <input value="<?php echo postVal("NorthEastLat")?>" name="NorthEastLat" type="hidden" id="NorthEastLat">
             <input value="<?php echo postVal("NorthEastLng")?>" name="NorthEastLng" type="hidden" id="NorthEastLng">
             <input value="<?php echo postVal("SouthWestLat")?>" name="SouthWestLat" type="hidden" id="SouthWestLat">
