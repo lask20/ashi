@@ -7,7 +7,7 @@ $.get( "feed.php", function( data ) {
 }
 
 function reloadfeed() {
-	setInterval(feed(), 5000);
+	setInterval(feed, 5000);
 }
 
 reloadfeed();
