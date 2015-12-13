@@ -42,7 +42,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['full
 }
 else {
   $status = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-    $status .= "Please complete form fill";
+    $status .= "Please complete form fields";
     $status .= '</div>';
 }
 
