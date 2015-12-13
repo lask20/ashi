@@ -35,7 +35,9 @@ if (!empty($_POST['email'])) {
   } catch (ParseException $ex) {
   // Show the error message somewhere and let the user try again.
     //echo  $ex->getMessage();
-    $status = $ex->getMessage();
+    $status = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+    $status .= $ex->getMessage();
+    $status .= '</div>';
   }
 }
 
