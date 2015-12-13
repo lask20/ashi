@@ -109,7 +109,11 @@ if (!empty($_POST['email'])) {
           <div class="register-logo">
             <b>A.S.H.I.</b>&nbsp;Register
             <br>
-            <h2><?php echo $status; ?></h2>
+            <h2><div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i>Alert!</h4>
+                    <?php echo $status; ?>
+                  </div>
           </div>
           <form action="#" method="post">
             <label for="exampleInputFile">Profile Picture</label>
