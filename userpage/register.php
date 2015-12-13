@@ -4,6 +4,14 @@ use Parse\ParseUser;
 use Parse\ParseException;
 use Parse\ParseGeoPoint;
 
+$status = "";
+function postVal($name) {
+  if (!empty($_POST[$name])) {
+    return $_POST[$name];
+  }
+  return null;
+}
+
 if (!empty($_POST['email'])) {
   $user = new ParseUser();
   $user->set("username", $_POST['email']);
@@ -23,10 +31,11 @@ if (!empty($_POST['email'])) {
 
   try {
     $user->signUp();
-  // Hooray! Let them use the app now.
+      header('Location: /');
   } catch (ParseException $ex) {
   // Show the error message somewhere and let the user try again.
-    echo "Error: " . $ex->getCode() . " " . $ex->getMessage();
+    //echo  $ex->getMessage();
+    $status = $ex->getMessage();
   }
 }
 
@@ -99,17 +108,19 @@ if (!empty($_POST['email'])) {
         <div class="wrappp">
           <div class="register-logo">
             <b>A.S.H.I.</b>&nbsp;Register
+            <br>
+            <h2><?php echo $status; ?></h2>
           </div>
           <form action="#" method="post">
             <label for="exampleInputFile">Profile Picture</label>
             <input type="file" id="exampleInputFile"></br>
-            <input name="NorthEastLat" type="hidden" id="NorthEastLat">
-            <input name="NorthEastLng" type="hidden" id="NorthEastLng">
-            <input name="SouthWestLat" type="hidden" id="SouthWestLat">
-            <input name="SouthWestLng" type="hidden" id="SouthWestLng">
+            <input value="<?php echo postVal("NorthEastLat")?>" name="NorthEastLat" type="hidden" id="NorthEastLat">
+            <input value="<?php echo postVal("NorthEastLng")?>" name="NorthEastLng" type="hidden" id="NorthEastLng">
+            <input value="<?php echo postVal("SouthWestLat")?>" name="SouthWestLat" type="hidden" id="SouthWestLat">
+            <input value="<?php echo postVal("SouthWestLng")?>" name="SouthWestLng" type="hidden" id="SouthWestLng">
 
             <div class="form-group has-feedback">
-              <input name="email" type="email" class="form-control" placeholder="Email">
+              <input value="<?php echo postVal("email")?>" name="email" type="email" class="form-control" placeholder="Email">
               <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -121,15 +132,15 @@ if (!empty($_POST['email'])) {
               <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-              <input name="fullname" type="text" class="form-control" placeholder="Full name">
+              <input value="<?php echo postVal("fullname")?>" name="fullname" type="text" class="form-control" placeholder="Full name">
               <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-              <input name="phone" type="text" class="form-control" placeholder="Phone number">
+              <input value="<?php echo postVal("phone")?>" name="phone" type="text" class="form-control" placeholder="Phone number">
               <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-              <textarea name="address" class="form-control" rows="3" placeholder="Address"></textarea>
+              <textarea value="<?php echo postVal("address")?>" name="address" class="form-control" rows="3" placeholder="Address"></textarea>
               <span class="glyphicon glyphicon-home form-control-feedback"></span>
             </div>
             <b>Location</b>&nbsp;&nbsp;( select area )

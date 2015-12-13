@@ -4,21 +4,23 @@ include "include/parse.php";
 use Parse\ParseUser;
 use Parse\ParseException;
 
+$status = "";
 if (!empty($_POST['username'])) {
 try {
   $user = ParseUser::logIn($_POST['username'], $_POST['password']);
     echo "success";
 } catch (ParseException $error) {
-    echo "error";
+  $status = $error->getMessage();
+    //echo $error->getMessage();
 }
 }
 
 $currentUser = ParseUser::getCurrentUser();
 if ($currentUser) {
-    echo "already login";
+
     header('Location: userpage/sendmsg.php');
 } else {
-    echo "not login";
+
 }
 
 
@@ -63,9 +65,10 @@ if ($currentUser) {
   <body>
 
     <div class="container">
-
+      <h2><?php echo $status; ?></h2>
       <form method="post" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
+        
         <label for="username" class="sr-only">Email address</label>
         <input id="username" type="text" name="username" class="form-control" placeholder="Username" required="" autofocus="">
         <label for="password" class="sr-only">Password</label>
