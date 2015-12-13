@@ -25,7 +25,7 @@ if (!empty($_POST['username'])) {
     $results->destroy(true);
   }
   else if ($_POST['button'] == "accept") {
-    $results->set("verifed",true);
+    $results->set("approve",1);
     $results->save(true);
   }
 }

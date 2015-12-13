@@ -7,6 +7,8 @@ use Parse\ParseObject;
 use Parse\ParseQuery;
 use Parse\ParseGeoPoint;
 
+echo $currentUser->get("verifed");
+
 $message = "";
 
 if (!empty($_POST['message'])) {
