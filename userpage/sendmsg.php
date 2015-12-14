@@ -51,6 +51,7 @@ if (!empty($_POST['message'])) {
   $noti->set("message", $_POST['message']);
   $noti->set("priority", $_POST['priority']);
   $noti->set("user", $currentUser);
+  $noti->set("fullName", $fullname);
   $noti->save();
 
 
