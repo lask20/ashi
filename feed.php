@@ -9,5 +9,5 @@ $query = new ParseQuery("NotiData");
 $query->descending("createdAt");
 $object = $query->first();
 
-echo $object->get("fullname")." : ".$object->get("message");
+echo $object->get("fullName")." : ".$object->get("message");
 ?>
