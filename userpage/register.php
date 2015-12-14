@@ -141,8 +141,8 @@ else if (!empty($_POST['email']) ){
               <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-              <input value="<?php echo postVal("fullname")?>" name="fullname" type="text" class="form-control" placeholder="Full name">
-              <span class="glyphicon glyphicon-user form-control-feedback"></span>
+              <input value="<?php echo postVal("fullname")?>" name="fullname" type="text" class="form-control" placeholder="Location Name">
+              <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
               <input value="<?php echo postVal("phone")?>" name="phone" type="text" class="form-control" placeholder="Phone number">
