@@ -24,7 +24,7 @@ if (!empty($_POST['message'])) {
   
   $location = $currentUser->get('location');
 
-  $fullname = $currentUser->get('fullname');
+  $fullname = $currentUser->get('fullName');
 
 
   $query = ParseInstallation::query();
