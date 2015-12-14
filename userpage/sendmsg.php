@@ -129,9 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <i class="fa fa-envelope"></i>
         <h3 class="box-title">Message</h3>
         <!-- tools box -->
-        <div class="pull-right box-tools">
-          <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-        </div><!-- /. tools -->
+    
       </div>
       <div class="box-body">
         <form id="form_id" action="#" method="post">
