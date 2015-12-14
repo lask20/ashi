@@ -24,7 +24,7 @@ if (!empty($_POST['message'])) {
   
   $location = $currentUser->get('location');
 
-  
+  $fullname = $currentUser->get('fullname');
 
 
   $query = ParseInstallation::query();
@@ -43,7 +43,7 @@ if (!empty($_POST['message'])) {
     "where" => $query,
     "data" => array(
       "badge" => "Increment",
-      "alert" => $_POST['message']
+      "alert" => $fullname." : ".$_POST['message']
       )
     ));
 
