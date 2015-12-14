@@ -97,7 +97,7 @@ else if (!empty($_POST['email']) ){
       width:400px;
       height:auto;
       margin:auto;
-      margin-bottom:10px;
+      margin-bottom:20px;
       text-align: center;
       position:relative;
     }
